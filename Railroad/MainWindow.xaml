@@ -1,0 +1,401 @@
+﻿<mah:MetroWindow
+	x:Class="Railroad.MainWindow"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+	xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+	xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+	xmlns:local="clr-namespace:Railroad.Controls"
+	mc:Ignorable="d"
+	Title="Railroad"
+	Height="963.1"
+	Width="800"
+	WindowStartupLocation="CenterScreen"
+	ResizeMode="CanMinimize"
+	Loaded="MetroWindow_Loaded">
+
+	<mah:MetroWindow.LeftWindowCommands>
+		<mah:WindowCommands>
+			<Image  Width="22" Height="22" Margin="10px 0px 10px 0px" Source="Resources/splash.png" />
+		</mah:WindowCommands>
+	</mah:MetroWindow.LeftWindowCommands>
+
+	<mah:MetroWindow.RightWindowCommands>
+		<mah:WindowCommands>
+			<Button x:Name="GitHub" ToolTip="Github 홈페이지 열기" Click="GitHub_Click">
+				<iconPacks:PackIconOcticons Width="22" Height="22" Kind="MarkGithub" />
+			</Button>
+		</mah:WindowCommands>
+	</mah:MetroWindow.RightWindowCommands>
+
+	<Grid Background="#FF252525" Width="794" HorizontalAlignment="Right" Height="934" VerticalAlignment="Top">
+		<ComboBox
+			x:Name="Start"
+			Margin="32,86,542,806"
+			Controls:TextBoxHelper.ClearTextButton="True"
+			Controls:TextBoxHelper.UseFloatingWatermark="True"
+			Controls:TextBoxHelper.Watermark="출발역"
+			IsEditable="True"
+			SelectedIndex="0"
+			SelectionChanged="Start_SelectionChanged" Height="42">
+			<ComboBox.ContextMenu>
+				<ContextMenu IsEnabled="False" Visibility="Collapsed" />
+			</ComboBox.ContextMenu>
+		</ComboBox>
+
+		<TextBox
+			x:Name="StartCode"
+			Margin="268,86,432,806"
+			Padding="10px 10px" Height="42">
+			<TextBox.Style>
+				<Style BasedOn="{StaticResource MahApps.Styles.TextBox}" TargetType="{x:Type TextBox}">
+					<Setter Property="Controls:TextBoxHelper.ClearTextButton" Value="True" />
+					<Style.Triggers>
+						<Trigger Property="Controls:TextBoxHelper.HasText" Value="False">
+							<Setter Property="Controls:TextBoxHelper.ClearTextButton" Value="False" />
+							<Setter Property="Controls:TextBoxHelper.Watermark" Value="코드" />
+						</Trigger>
+
+						<Trigger Property="Controls:TextBoxHelper.HasText" Value="True">
+							<Setter Property="Controls:TextBoxHelper.ClearTextButton" Value="True" />
+						</Trigger>
+					</Style.Triggers>
+				</Style>
+			</TextBox.Style>
+		</TextBox>
+
+		<ComboBox
+			x:Name="End"
+			Margin="31,134,542,758"
+			Controls:TextBoxHelper.ClearTextButton="True"
+			Controls:TextBoxHelper.UseFloatingWatermark="True"
+			Controls:TextBoxHelper.Watermark="도착역"
+			IsEditable="True"
+			SelectedIndex="0"
+			SelectionChanged="End_SelectionChanged" Height="42">
+			<ComboBox.ContextMenu>
+				<ContextMenu IsEnabled="False" Visibility="Collapsed" />
+			</ComboBox.ContextMenu>
+		</ComboBox>
+
+		<TextBox
+			x:Name="EndCode"
+			Margin="268,134,432,758"
+			Padding="10px 10px" Height="42">
+			<TextBox.Style>
+				<Style BasedOn="{StaticResource MahApps.Styles.TextBox}" TargetType="{x:Type TextBox}">
+					<Setter Property="Controls:TextBoxHelper.ClearTextButton" Value="True" />
+					<Style.Triggers>
+						<Trigger Property="Controls:TextBoxHelper.HasText" Value="False">
+							<Setter Property="Controls:TextBoxHelper.ClearTextButton" Value="False" />
+							<Setter Property="Controls:TextBoxHelper.Watermark" Value="코드" />
+						</Trigger>
+
+						<Trigger Property="Controls:TextBoxHelper.HasText" Value="True">
+							<Setter Property="Controls:TextBoxHelper.ClearTextButton" Value="True" />
+						</Trigger>
+					</Style.Triggers>
+				</Style>
+			</TextBox.Style>
+		</TextBox>
+
+		<RadioButton
+			x:Name="All"
+			GroupName="Type"
+			IsChecked="True"
+			Margin="424,83,314,821" RenderTransformOrigin="0.59,-0.407" Padding="6,0,0,0" Width="56" Height="30">전체</RadioButton>
+
+		<RadioButton
+			x:Name="Direct"
+			GroupName="Mode"
+			IsChecked="True"
+			Margin="424,111,314,793" Padding="6,0,0,0" Height="30" RenderTransformOrigin="-0.247,1.467" Width="56">직통</RadioButton>
+
+		<CheckBox
+			x:Name="Near"
+			IsChecked="True"
+			IsEnabled="True"
+			Margin="486,111,210,793" Height="30" Width="98">인접역 포함</CheckBox>
+
+		<local:StartDateTimePicker
+			x:Name="StartDate"
+			Margin="424,146,142,758"
+			Controls:TextBoxHelper.Watermark="출발날짜"
+			SelectedTimeFormat="Short"
+			Culture="en-In" Height="30" />
+
+		<mah:TimePicker
+			x:Name="EndTime"
+			Margin="674,146,27,758"
+			Controls:TextBoxHelper.Watermark="구간"
+			SelectedTimeFormat="Short"
+			Culture="en-In"
+			SelectedDateTime="23:59" Height="30" />
+
+		<mah:NumericUpDown
+			x:Name="Psg1"
+			Maximum="9"
+			Minimum="0"
+			Value="1"
+			Margin="422,199,257,702"
+			StringFormat="성인 0명" Width="115" Height="33"/>
+
+		<mah:NumericUpDown
+			x:Name="Psg2"
+			Maximum="9"
+			Minimum="0"
+			Value="0"
+			Margin="537,199,142,702"
+			StringFormat="어린이 0명" Width="115" Height="33"/>
+
+		<mah:NumericUpDown
+			x:Name="Psg8"
+			Maximum="9"
+			Minimum="0"
+			Value="0"
+			Margin="537,232,142,669"
+			StringFormat="유아 0명" Width="115" Height="33"/>
+
+		<mah:NumericUpDown
+			x:Name="Psg3"
+			Maximum="9"
+			Minimum="0"
+			Value="0"
+			Margin="422,232,257,669"
+			StringFormat="노약자 0명" Width="115" Height="33"/>
+
+		<mah:NumericUpDown
+			x:Name="Psg4"
+			Maximum="9"
+			Minimum="0"
+			Value="0"
+			Margin="652,232,27,669"
+			StringFormat="중증 0명" Width="115" Height="33"/>
+
+		<mah:NumericUpDown
+			x:Name="Psg5"
+			Maximum="9"
+			Minimum="0"
+			Value="0"
+			Margin="652,199,27,702"
+			StringFormat="경증 0명" Width="115" Height="33"/>
+
+		<Button
+			x:Name="Execute"
+			Width="48"
+			Height="48"
+			Margin="721,855,25,31"
+			BorderThickness="3"
+			Click="Execute_Click">
+			<Button.Style>
+				<Style BasedOn="{StaticResource MahApps.Styles.Button.Circle}" TargetType="{x:Type ButtonBase}">
+					<Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent}" />
+					<Setter Property="Background" Value="white" />
+					<Style.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
+						</Trigger>
+						<Trigger Property="IsPressed" Value="True">
+							<Setter Property="Background" Value="Gainsboro" />
+						</Trigger>
+					</Style.Triggers>
+				</Style>
+			</Button.Style>
+
+			<iconPacks:PackIconModern Width="20" Height="20" Kind="ControlPlay" />
+		</Button>
+		
+		<Button
+			x:Name="Stop"
+			Width="48"
+			Height="48"
+			Margin="721,855,25,31"
+			BorderThickness="3"
+			Visibility="Collapsed"
+			Click="Stop_Click">
+			<Button.Style>
+				<Style BasedOn="{StaticResource MahApps.Styles.Button.Circle}" TargetType="{x:Type ButtonBase}">
+					<Setter Property="Foreground" Value="#FFF95656" />
+					<Setter Property="Background" Value="white" />
+					<Style.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
+						</Trigger>
+						<Trigger Property="IsPressed" Value="True">
+							<Setter Property="Background" Value="Gainsboro" />
+						</Trigger>
+					</Style.Triggers>
+				</Style>
+			</Button.Style>
+
+			<iconPacks:PackIconModern Width="20" Height="20" Kind="ControlStop" />
+		</Button>
+
+		<ComboBox
+			x:Name="SeatType"
+			Margin="32,223,652,669"
+			Controls:TextBoxHelper.ClearTextButton="True"
+			Controls:TextBoxHelper.UseFloatingWatermark="True"
+			Controls:TextBoxHelper.Watermark="좌석타입"
+			IsEditable="True"
+			SelectedIndex="0"
+			SelectionChanged="Start_SelectionChanged"
+			Height="42" Width="110">
+			<ComboBox.ContextMenu>
+				<ContextMenu IsEnabled="False" Visibility="Collapsed" />
+			</ComboBox.ContextMenu>
+
+			<ComboBoxItem Content="기본" Tag="000" />
+			<ComboBoxItem Content="1인석" Tag="011" />
+			<ComboBoxItem Content="창측" Tag="012" />
+			<ComboBoxItem Content="통로측" Tag="013" />
+		</ComboBox>
+
+		<ComboBox
+			x:Name="SeatDirection"
+			Margin="142,223,542,669"
+			Controls:TextBoxHelper.ClearTextButton="True"
+			Controls:TextBoxHelper.UseFloatingWatermark="True"
+			Controls:TextBoxHelper.Watermark="방향"
+			IsEditable="True"
+			SelectedIndex="0"
+			SelectionChanged="Start_SelectionChanged"
+			Height="42" RenderTransformOrigin="-0.585,1.786" Width="110">
+			<ComboBox.ContextMenu>
+				<ContextMenu IsEnabled="False" Visibility="Collapsed" />
+			</ComboBox.ContextMenu>
+
+			<ComboBoxItem Content="전체" Tag="000" />
+			<ComboBoxItem Content="순방향" Tag="009" />
+			<ComboBoxItem Content="역방향" Tag="010" />
+		</ComboBox>
+
+		<ComboBox
+			x:Name="SeatOption"
+			Margin="252,223,432,669"
+			Controls:TextBoxHelper.ClearTextButton="True"
+			Controls:TextBoxHelper.UseFloatingWatermark="True"
+			Controls:TextBoxHelper.Watermark="옵션"
+			IsEditable="True"
+			SelectedIndex="0"
+			SelectionChanged="Start_SelectionChanged"
+			Height="42" Width="110">
+			<ComboBox.ContextMenu>
+				<ContextMenu IsEnabled="False" Visibility="Collapsed" />
+			</ComboBox.ContextMenu>
+
+			<ComboBoxItem Content="기본" Tag="015" />
+			<ComboBoxItem Content="유아동반" Tag="019" />
+			<ComboBoxItem Content="편한대화" Tag="019" />
+			<ComboBoxItem Content="노트북" Tag="031" />
+			<ComboBoxItem Content="휠체어" Tag="021" />
+			<ComboBoxItem Content="전동휠체어" Tag="028" />
+			<ComboBoxItem Content="수유실 인접" Tag="XXX" />
+			<ComboBoxItem Content="2층석" Tag="018" />
+			<ComboBoxItem Content="자전거 거치대" Tag="032" />
+		</ComboBox>
+
+		<Rectangle HorizontalAlignment="Left" Height="108" Margin="30,342,0,0" Stroke="#FFCCCCCC" VerticalAlignment="Top" Width="739"></Rectangle>
+
+		<ScrollViewer Margin="32,345,27,487" Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True" Height="102">
+			<ListView x:Name="Target" TextBlock.TextAlignment="Center" BorderBrush="White">
+				<ListView.Resources>
+					<DataTemplate x:Key="Col1">
+						<TextBlock HorizontalAlignment="Center" Width="100" Text="{Binding}"/>
+					</DataTemplate>
+					<DataTemplate x:Key="Col2">
+						<TextBlock HorizontalAlignment="Center" Width="100" Text="{Binding}"/>
+					</DataTemplate>
+					<DataTemplate x:Key="Col3">
+						<TextBlock HorizontalAlignment="Center" Width="86" Text="{Binding}"/>
+					</DataTemplate>
+					<DataTemplate x:Key="Col4">
+						<TextBlock HorizontalAlignment="Center" Width="60" Text="{Binding}"/>
+					</DataTemplate>
+				</ListView.Resources>
+				<ListView.View>
+					<GridView>
+						<GridViewColumn Header="출발역" HeaderTemplate="{StaticResource Col1}" Width="100" DisplayMemberBinding="{Binding StartStation}" />
+						<GridViewColumn Header="도착역" HeaderTemplate="{StaticResource Col2}" Width="100" DisplayMemberBinding="{Binding EndStation}" />
+						<GridViewColumn Header="날짜" HeaderTemplate="{StaticResource Col3}" Width="86" DisplayMemberBinding="{Binding Date4List}" />
+						<GridViewColumn Header="시간" HeaderTemplate="{StaticResource Col4}" Width="60" DisplayMemberBinding="{Binding StartTime4List}" />
+						<GridViewColumn Header="구간" HeaderTemplate="{StaticResource Col4}" Width="60" DisplayMemberBinding="{Binding EndTime4List}" />
+					</GridView>
+				</ListView.View>
+			</ListView>
+		</ScrollViewer>
+
+		<Button
+			x:Name="Add"
+			Margin="30,308,734,596"
+			Width="30"
+			Height="30"
+			Foreground="White"
+			Click="Add_Click"
+			Background="Green"
+			BorderBrush="White">
+			<iconPacks:PackIconModern Width="15" Height="15" Kind="Add" />
+		</Button>
+
+		<Button
+			x:Name="Delete"
+			Margin="704,308,60,596"
+			Width="30"
+			Height="30"
+			Foreground="White"
+			Click="Delete_Click"
+			Background="#FFE43535"
+			BorderBrush="White">
+			<iconPacks:PackIconModern Width="15" Height="15" Kind="Minus" />
+		</Button>
+
+		<Button
+			x:Name="Clean"
+			Margin="739,308,25,596"
+			Width="30"
+			Height="30"
+			Foreground="White"
+			Click="Clean_Click"
+			Background="#FFE43535">
+			<iconPacks:PackIconModern Width="15" Height="15" Kind="Clean" />
+		</Button>
+
+		<Rectangle HorizontalAlignment="Left" Height="305" Margin="30,521,0,0" Stroke="#FFCCCCCC" VerticalAlignment="Top" Width="739"/>
+
+		<ScrollViewer Margin="31,522,25,108" Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True" Height="303">
+			<ListView x:Name="Result" TextBlock.TextAlignment="Center" BorderBrush="White" MouseDoubleClick="Result_MouseDoubleClick">
+				<ListView.Resources>
+					<DataTemplate x:Key="Long">
+						<TextBlock HorizontalAlignment="Center" Width="100" Text="{Binding}"/>
+					</DataTemplate>
+					<DataTemplate x:Key="Short">
+						<TextBlock HorizontalAlignment="Center" Width="50" Text="{Binding}"/>
+					</DataTemplate>
+				</ListView.Resources>
+
+				<ListView.View>
+					<GridView>
+						<GridViewColumn Header="날짜" HeaderTemplate="{StaticResource Long}" Width="100" DisplayMemberBinding="{Binding Date}" />
+						<GridViewColumn Header="종류" HeaderTemplate="{StaticResource Long}" Width="100" DisplayMemberBinding="{Binding Type}" />
+						<GridViewColumn Header="번호" HeaderTemplate="{StaticResource Long}" Width="100" DisplayMemberBinding="{Binding Number}" />
+						<GridViewColumn Header="출발역" HeaderTemplate="{StaticResource Long}" Width="100" DisplayMemberBinding="{Binding Start}" />
+						<GridViewColumn Header="출발시간" HeaderTemplate="{StaticResource Long}" Width="100" DisplayMemberBinding="{Binding StartTime}" />
+						<GridViewColumn Header="도착역" HeaderTemplate="{StaticResource Long}" Width="100" DisplayMemberBinding="{Binding End}" />
+						<GridViewColumn Header="도착시간" HeaderTemplate="{StaticResource Long}" Width="100" DisplayMemberBinding="{Binding EndTime}" />
+						<GridViewColumn Header="특실" HeaderTemplate="{StaticResource Long}" Width="100" DisplayMemberBinding="{Binding First}" />
+						<GridViewColumn Header="일반실" HeaderTemplate="{StaticResource Long}" Width="100" DisplayMemberBinding="{Binding Eco}" />
+						<GridViewColumn Header="경유" HeaderTemplate="{StaticResource Long}" Width="100" DisplayMemberBinding="{Binding Via}" />
+						<GridViewColumn Header="소요시간" HeaderTemplate="{StaticResource Long}" Width="100" DisplayMemberBinding="{Binding Time}" />
+					</GridView>
+				</ListView.View>
+			</ListView>
+		</ScrollViewer>
+
+		<Label Name="Time" HorizontalAlignment="Left" Margin="30,491,0,0" VerticalAlignment="Top"/>
+		<Label Name="Total" HorizontalAlignment="Right" Margin="0,491,27,0" VerticalAlignment="Top"/>
+		
+		<Image Margin="0,16,0,881" Source="Resources/catchphrase.png"/>
+	</Grid>
+</mah:MetroWindow>
