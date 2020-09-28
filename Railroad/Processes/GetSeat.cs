@@ -52,9 +52,9 @@ namespace Railroad.Processes
 				{
 					Process(bean);
 				}
-			}
 
-			Thread.Sleep(2000);
+				Thread.Sleep(1000);
+			}
 		}
 
 		/// <summary>
@@ -80,7 +80,7 @@ namespace Railroad.Processes
 		/// <returns>[void] 내부 함수 수행</returns>
 		public override void OnCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
-			
+			// No
 		}
 
 		/// <summary>
@@ -111,6 +111,7 @@ namespace Railroad.Processes
 						main.Total.Content = result.Count + "개";
 					}));
 
+					// 빈 좌석이 하나도 없을 경우
 					if (result.Count > 0)
 					{
 						SoundPlayer player = new SoundPlayer(Properties.Resources.alert);

@@ -18,7 +18,7 @@
 
 	<mah:MetroWindow.LeftWindowCommands>
 		<mah:WindowCommands>
-			<Image  Width="22" Height="22" Margin="10px 0px 10px 0px" Source="Resources/splash.png" />
+			<Image  Width="22" Height="22" Margin="10px 0px 10px 0px" Source="Railroad.ico" />
 		</mah:WindowCommands>
 	</mah:MetroWindow.LeftWindowCommands>
 
@@ -206,7 +206,7 @@
 
 			<iconPacks:PackIconModern Width="20" Height="20" Kind="ControlPlay" />
 		</Button>
-		
+
 		<Button
 			x:Name="Stop"
 			Width="48"
@@ -395,7 +395,7 @@
 
 		<Label Name="Time" HorizontalAlignment="Left" Margin="30,491,0,0" VerticalAlignment="Top"/>
 		<Label Name="Total" HorizontalAlignment="Right" Margin="0,491,27,0" VerticalAlignment="Top"/>
-		
-		<Image Margin="0,16,0,881" Source="Resources/catchphrase.png"/>
+
+		<Image Margin="0,21,0,876" Source="Resources/catchphrase.png"/>
 	</Grid>
 </mah:MetroWindow>

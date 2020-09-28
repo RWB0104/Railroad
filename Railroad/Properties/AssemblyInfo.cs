@@ -8,12 +8,12 @@ using System.Windows;
 // 제어됩니다. 어셈블리와 관련된 정보를 수정하려면
 // 이러한 특성 값을 변경하세요.
 [assembly: AssemblyTitle("Railroad")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Korail Seat Checker")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("RWB")]
 [assembly: AssemblyProduct("Railroad")]
-[assembly: AssemblyCopyright("Copyright ©  2020")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("Copyright © 2020. RWB. All rights reserved")]
+[assembly: AssemblyTrademark("Kapoo")]
 [assembly: AssemblyCulture("")]
 
 // ComVisible을 false로 설정하면 이 어셈블리의 형식이 COM 구성 요소에 

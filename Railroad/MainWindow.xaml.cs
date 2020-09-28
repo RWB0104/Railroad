@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
-using System.Media;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using MahApps.Metro.Controls;
@@ -78,7 +75,7 @@ namespace Railroad
 		/// <returns>[void] Github 홈페이지 리다이렉트</returns>
 		private void GitHub_Click(object sender, RoutedEventArgs e)
 		{
-			Process.Start("https://github.com/RWB0104");
+			Process.Start("https://github.com/RWB0104/Railroad");
 		}
 
 		/// <summary>
@@ -131,13 +128,23 @@ namespace Railroad
 			}
 		}
 
+		/// <summary>
+		/// 매크로 실행 버튼 클릭 이벤트 함수
+		/// </summary>
+		/// 
+		/// <param name="sender" type="object">이벤트 발생 객체</param>
+		/// <param name="e" type="RoutedEventArgs">이벤트 객체</param>
+		/// 
+		/// <returns>[void] 매크로 동작</returns>
 		private void Execute_Click(object sender, RoutedEventArgs e)
 		{
+			// 리스트에 데이터가 없을 경우
 			if (list.Count <= 0)
 			{
-
+				this.ShowModalMessageExternal("Error", "하나 이상의 타겟을 지정해주세요.");
 			}
 
+			// 리스트에 데이터가 있을 경우
 			else
 			{
 				Result.ItemsSource = null;
@@ -154,6 +161,14 @@ namespace Railroad
 			}
 		}
 
+		/// <summary>
+		/// 매크로 동작 종료 버튼 클릭 이벤트 함수
+		/// </summary>
+		/// 
+		/// <param name="sender" type="object">이벤트 발생 객체</param>
+		/// <param name="e" type="RoutedEventArgs">이벤트 객체</param>
+		/// 
+		/// <returns>[void] 매크로 동작 종료</returns>
 		private void Stop_Click(object sender, RoutedEventArgs e)
 		{
 			worker.CancelAsync();
@@ -163,20 +178,31 @@ namespace Railroad
 			Stop.Visibility = Visibility.Collapsed;
 		}
 
+		/// <summary>
+		/// 매크로 확인 대상 추가 버튼 클릭 이벤트 함수
+		/// </summary>
+		/// 
+		/// <param name="sender" type="object">이벤트 발생 객체</param>
+		/// <param name="e" type="RoutedEventArgs">이벤트 객체</param>
+		/// 
+		/// <returns>[void] 대상 추가</returns>
 		private void Add_Click(object sender, RoutedEventArgs e)
 		{
 			int count = (int)(Psg1.Value + Psg2.Value + Psg3.Value + Psg4.Value + Psg5.Value + Psg8.Value);
 
+			// 총 인원이 9명을 초과할 경우
 			if (count > 9)
 			{
 				this.ShowModalMessageExternal("Error", "최대 9명의 좌석까지만 조회됩니다.\n(코레일 정책)");
 			}
 
+			// 총 인원이 1명 미만일 경우
 			else if (count < 1)
 			{
 				this.ShowModalMessageExternal("Error", "최소 한 명의 인원이 필요합니다.");
 			}
 
+			// 모든 조건을 만족할 경우
 			else
 			{
 				int year = StartDate.SelectedDateTime.GetValueOrDefault().Year;
@@ -201,6 +227,14 @@ namespace Railroad
 			}
 		}
 
+		/// <summary>
+		/// 매크로 확인 대상 제거 버튼 클릭 이벤트 함수
+		/// </summary>
+		/// 
+		/// <param name="sender" type="object">이벤트 발생 객체</param>
+		/// <param name="e" type="RoutedEventArgs">이벤트 객체</param>
+		/// 
+		/// <returns>[void] 선택한 대상 제거</returns>
 		private void Delete_Click(object sender, RoutedEventArgs e)
 		{
 			// 현재 선택된 리스트 요소가 유효할 경우
@@ -213,6 +247,14 @@ namespace Railroad
 			}
 		}
 
+		/// <summary>
+		/// 매크로 확인 대상 전체 제거 버튼 클릭 이벤트 함수
+		/// </summary>
+		/// 
+		/// <param name="sender" type="object">이벤트 발생 객체</param>
+		/// <param name="e" type="RoutedEventArgs">이벤트 객체</param>
+		/// 
+		/// <returns>[void] 선택한 대상 전체 제거</returns>
 		private void Clean_Click(object sender, RoutedEventArgs e)
 		{
 			list.Clear();
@@ -221,8 +263,17 @@ namespace Railroad
 			Target.Items.Refresh();
 		}
 
+		/// <summary>
+		/// 결과 행 더블클릭 이벤트 함수
+		/// </summary>
+		/// 
+		/// <param name="sender" type="object">이벤트 발생 객체</param>
+		/// <param name="e" type="MouseButtonEventArgs">이벤트 객체</param>
+		/// 
+		/// <returns>[void] 해당하는 웹페이지 출력</returns>
 		private void Result_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
+			// 선택한 대상이 하나일 경우
 			if (Result.SelectedItems.Count == 1)
 			{
 				Process.Start(((ResultBean)Result.SelectedItem).Url);
