@@ -158,6 +158,7 @@ namespace Railroad
 
 				Execute.Visibility = Visibility.Collapsed;
 				Stop.Visibility = Visibility.Visible;
+				Bar.Visibility = Visibility.Visible;
 			}
 		}
 
@@ -176,6 +177,7 @@ namespace Railroad
 
 			Execute.Visibility = Visibility.Visible;
 			Stop.Visibility = Visibility.Collapsed;
+			Bar.Visibility = Visibility.Collapsed;
 		}
 
 		/// <summary>

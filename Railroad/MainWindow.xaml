@@ -8,9 +8,10 @@
 	xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
 	xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
 	xmlns:local="clr-namespace:Railroad.Controls"
+	xmlns:notifications="clr-namespace:Notification.Wpf.Controls;assembly=Notifications.Wpf"
 	mc:Ignorable="d"
 	Title="Railroad"
-	Height="963.1"
+	Height="879.1"
 	Width="800"
 	WindowStartupLocation="CenterScreen"
 	ResizeMode="CanMinimize"
@@ -30,10 +31,11 @@
 		</mah:WindowCommands>
 	</mah:MetroWindow.RightWindowCommands>
 
-	<Grid Background="#FF252525" Width="794" HorizontalAlignment="Right" Height="934" VerticalAlignment="Top">
+	<Grid Background="#FF252525" HorizontalAlignment="Right" Margin="0">
+		<notifications:NotificationArea x:Name="WindowArea" Position="TopLeft" MaxItems="3" Margin="0"/>
 		<ComboBox
 			x:Name="Start"
-			Margin="32,86,542,806"
+			Margin="32,91,542,691"
 			Controls:TextBoxHelper.ClearTextButton="True"
 			Controls:TextBoxHelper.UseFloatingWatermark="True"
 			Controls:TextBoxHelper.Watermark="출발역"
@@ -47,7 +49,7 @@
 
 		<TextBox
 			x:Name="StartCode"
-			Margin="268,86,432,806"
+			Margin="268,91,432,691"
 			Padding="10px 10px" Height="42">
 			<TextBox.Style>
 				<Style BasedOn="{StaticResource MahApps.Styles.TextBox}" TargetType="{x:Type TextBox}">
@@ -68,7 +70,7 @@
 
 		<ComboBox
 			x:Name="End"
-			Margin="31,134,542,758"
+			Margin="31,139,542,643"
 			Controls:TextBoxHelper.ClearTextButton="True"
 			Controls:TextBoxHelper.UseFloatingWatermark="True"
 			Controls:TextBoxHelper.Watermark="도착역"
@@ -82,7 +84,7 @@
 
 		<TextBox
 			x:Name="EndCode"
-			Margin="268,134,432,758"
+			Margin="268,139,432,643"
 			Padding="10px 10px" Height="42">
 			<TextBox.Style>
 				<Style BasedOn="{StaticResource MahApps.Styles.TextBox}" TargetType="{x:Type TextBox}">
@@ -105,90 +107,89 @@
 			x:Name="All"
 			GroupName="Type"
 			IsChecked="True"
-			Margin="424,83,314,821" RenderTransformOrigin="0.59,-0.407" Padding="6,0,0,0" Width="56" Height="30">전체</RadioButton>
+			Margin="424,88,314,706" RenderTransformOrigin="0.59,-0.407" Padding="6,0,0,0" Width="56" Height="30" Content="전체"/>
 
 		<RadioButton
 			x:Name="Direct"
 			GroupName="Mode"
 			IsChecked="True"
-			Margin="424,111,314,793" Padding="6,0,0,0" Height="30" RenderTransformOrigin="-0.247,1.467" Width="56">직통</RadioButton>
+			Margin="424,116,314,678" Padding="6,0,0,0" Height="30" RenderTransformOrigin="-0.247,1.467" Width="56" Content="직통"/>
 
 		<CheckBox
 			x:Name="Near"
 			IsChecked="True"
 			IsEnabled="True"
-			Margin="486,111,210,793" Height="30" Width="98">인접역 포함</CheckBox>
+			Margin="486,116,210,678" Height="30" Width="98" Content="인접역 포함"/>
 
 		<local:StartDateTimePicker
 			x:Name="StartDate"
-			Margin="424,146,142,758"
+			Margin="424,151,142,643"
 			Controls:TextBoxHelper.Watermark="출발날짜"
 			SelectedTimeFormat="Short"
 			Culture="en-In" Height="30" />
 
-		<mah:TimePicker
+		<Controls:TimePicker
 			x:Name="EndTime"
-			Margin="674,146,27,758"
+			Margin="674,151,27,643"
 			Controls:TextBoxHelper.Watermark="구간"
 			SelectedTimeFormat="Short"
 			Culture="en-In"
 			SelectedDateTime="23:59" Height="30" />
 
-		<mah:NumericUpDown
+		<Controls:NumericUpDown
 			x:Name="Psg1"
 			Maximum="9"
 			Minimum="0"
 			Value="1"
-			Margin="422,199,257,702"
+			Margin="422,204,257,587"
 			StringFormat="성인 0명" Width="115" Height="33"/>
 
-		<mah:NumericUpDown
+		<Controls:NumericUpDown
 			x:Name="Psg2"
 			Maximum="9"
 			Minimum="0"
 			Value="0"
-			Margin="537,199,142,702"
+			Margin="537,204,142,587"
 			StringFormat="어린이 0명" Width="115" Height="33"/>
 
-		<mah:NumericUpDown
+		<Controls:NumericUpDown
 			x:Name="Psg8"
 			Maximum="9"
 			Minimum="0"
 			Value="0"
-			Margin="537,232,142,669"
+			Margin="537,237,142,554"
 			StringFormat="유아 0명" Width="115" Height="33"/>
 
-		<mah:NumericUpDown
+		<Controls:NumericUpDown
 			x:Name="Psg3"
 			Maximum="9"
 			Minimum="0"
 			Value="0"
-			Margin="422,232,257,669"
+			Margin="422,237,257,554"
 			StringFormat="노약자 0명" Width="115" Height="33"/>
 
-		<mah:NumericUpDown
+		<Controls:NumericUpDown
 			x:Name="Psg4"
 			Maximum="9"
 			Minimum="0"
 			Value="0"
-			Margin="652,232,27,669"
+			Margin="652,237,27,554"
 			StringFormat="중증 0명" Width="115" Height="33"/>
 
-		<mah:NumericUpDown
+		<Controls:NumericUpDown
 			x:Name="Psg5"
 			Maximum="9"
 			Minimum="0"
 			Value="0"
-			Margin="652,199,27,702"
+			Margin="652,204,27,587"
 			StringFormat="경증 0명" Width="115" Height="33"/>
 
 		<Button
 			x:Name="Execute"
 			Width="48"
-			Height="48"
-			Margin="721,855,25,31"
+			Margin="0,0,25,25"
 			BorderThickness="3"
-			Click="Execute_Click">
+			Click="Execute_Click" HorizontalAlignment="Right" Height="48" VerticalAlignment="Bottom">
 			<Button.Style>
 				<Style BasedOn="{StaticResource MahApps.Styles.Button.Circle}" TargetType="{x:Type ButtonBase}">
 					<Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent}" />
@@ -211,10 +212,9 @@
 			x:Name="Stop"
 			Width="48"
 			Height="48"
-			Margin="721,855,25,31"
+			Margin="721,751,25,25"
 			BorderThickness="3"
-			Visibility="Collapsed"
-			Click="Stop_Click">
+			Click="Stop_Click" Visibility="Collapsed">
 			<Button.Style>
 				<Style BasedOn="{StaticResource MahApps.Styles.Button.Circle}" TargetType="{x:Type ButtonBase}">
 					<Setter Property="Foreground" Value="#FFF95656" />
@@ -235,7 +235,7 @@
 
 		<ComboBox
 			x:Name="SeatType"
-			Margin="32,223,652,669"
+			Margin="32,228,652,554"
 			Controls:TextBoxHelper.ClearTextButton="True"
 			Controls:TextBoxHelper.UseFloatingWatermark="True"
 			Controls:TextBoxHelper.Watermark="좌석타입"
@@ -255,7 +255,7 @@
 
 		<ComboBox
 			x:Name="SeatDirection"
-			Margin="142,223,542,669"
+			Margin="142,228,542,554"
 			Controls:TextBoxHelper.ClearTextButton="True"
 			Controls:TextBoxHelper.UseFloatingWatermark="True"
 			Controls:TextBoxHelper.Watermark="방향"
@@ -274,7 +274,7 @@
 
 		<ComboBox
 			x:Name="SeatOption"
-			Margin="252,223,432,669"
+			Margin="252,228,432,554"
 			Controls:TextBoxHelper.ClearTextButton="True"
 			Controls:TextBoxHelper.UseFloatingWatermark="True"
 			Controls:TextBoxHelper.Watermark="옵션"
@@ -297,9 +297,9 @@
 			<ComboBoxItem Content="자전거 거치대" Tag="032" />
 		</ComboBox>
 
-		<Rectangle HorizontalAlignment="Left" Height="108" Margin="30,342,0,0" Stroke="#FFCCCCCC" VerticalAlignment="Top" Width="739"></Rectangle>
+		<Rectangle HorizontalAlignment="Left" Height="108" Margin="30,362,0,0" Stroke="#FFCCCCCC" VerticalAlignment="Top" Width="739"/>
 
-		<ScrollViewer Margin="32,345,27,487" Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True" Height="102">
+		<ScrollViewer Margin="32,364,27,384" Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True" Height="102">
 			<ListView x:Name="Target" TextBlock.TextAlignment="Center" BorderBrush="White">
 				<ListView.Resources>
 					<DataTemplate x:Key="Col1">
@@ -328,43 +328,27 @@
 		</ScrollViewer>
 
 		<Button
-			x:Name="Add"
-			Margin="30,308,734,596"
-			Width="30"
-			Height="30"
-			Foreground="White"
-			Click="Add_Click"
-			Background="Green"
-			BorderBrush="White">
-			<iconPacks:PackIconModern Width="15" Height="15" Kind="Add" />
-		</Button>
-
-		<Button
 			x:Name="Delete"
-			Margin="704,308,60,596"
-			Width="30"
-			Height="30"
+			Margin="687,325,75,0"
 			Foreground="White"
 			Click="Delete_Click"
 			Background="#FFE43535"
-			BorderBrush="White">
+			BorderBrush="White" MinHeight="0" Width="32" Height="32" VerticalAlignment="Top">
 			<iconPacks:PackIconModern Width="15" Height="15" Kind="Minus" />
 		</Button>
 
 		<Button
 			x:Name="Clean"
-			Margin="739,308,25,596"
-			Width="30"
-			Height="30"
+			Margin="735,325,0,0"
 			Foreground="White"
 			Click="Clean_Click"
-			Background="#FFE43535">
+			Background="#FFE43535" MinHeight="0" Height="32" Width="32" VerticalAlignment="Top" HorizontalAlignment="Left">
 			<iconPacks:PackIconModern Width="15" Height="15" Kind="Clean" />
 		</Button>
 
-		<Rectangle HorizontalAlignment="Left" Height="305" Margin="30,521,0,0" Stroke="#FFCCCCCC" VerticalAlignment="Top" Width="739"/>
+		<Rectangle HorizontalAlignment="Left" Height="183" Margin="30,525,0,0" Stroke="#FFCCCCCC" VerticalAlignment="Top" Width="739"/>
 
-		<ScrollViewer Margin="31,522,25,108" Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True" Height="303">
+		<ScrollViewer Margin="31,528,25,0" Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True" Height="175" VerticalAlignment="Top">
 			<ListView x:Name="Result" TextBlock.TextAlignment="Center" BorderBrush="White" MouseDoubleClick="Result_MouseDoubleClick">
 				<ListView.Resources>
 					<DataTemplate x:Key="Long">
@@ -393,9 +377,19 @@
 			</ListView>
 		</ScrollViewer>
 
-		<Label Name="Time" HorizontalAlignment="Left" Margin="30,491,0,0" VerticalAlignment="Top"/>
-		<Label Name="Total" HorizontalAlignment="Right" Margin="0,491,27,0" VerticalAlignment="Top"/>
+		<Label x:Name="Time" HorizontalAlignment="Left" Margin="30,495,0,0" VerticalAlignment="Top"/>
+		<Label x:Name="Total" HorizontalAlignment="Right" Margin="0,495,27,0" VerticalAlignment="Top"/>
 
-		<Image Margin="0,21,0,876" Source="Resources/catchphrase.png"/>
+		<Image Margin="0,26,0,0" Source="Resources/catchphrase.png" Height="37" VerticalAlignment="Top"/>
+		<Controls:MetroProgressBar x:Name="Bar" Height="10" Margin="32,726,32,0" VerticalAlignment="Top" IsIndeterminate="True" Visibility="Collapsed"/>
+		<Button
+			x:Name="Add"
+			Margin="32,325,730,0"
+			Foreground="White"
+			Click="Add_Click"
+			Background="Green"
+			BorderBrush="White" MinHeight="0" Width="32" Height="32" VerticalAlignment="Top">
+			<iconPacks:PackIconModern Width="15" Height="15" Kind="Add" />
+		</Button>
 	</Grid>
 </mah:MetroWindow>

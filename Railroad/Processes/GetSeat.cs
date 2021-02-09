@@ -7,6 +7,7 @@ using System.Threading;
 using System.Web;
 using HtmlAgilityPack;
 using MahApps.Metro.Controls;
+using Notification.Wpf;
 using Railroad.Beans;
 
 namespace Railroad.Processes
@@ -111,11 +112,19 @@ namespace Railroad.Processes
 						main.Total.Content = result.Count + "개";
 					}));
 
-					// 빈 좌석이 하나도 없을 경우
+					// 빈 좌석이 있을 경우
 					if (result.Count > 0)
 					{
 						SoundPlayer player = new SoundPlayer(Properties.Resources.alert);
 						player.Play();
+
+						NotificationManager notification = new NotificationManager();
+						notification.Show(new NotificationContent
+						{
+							Title = "빈자리 확인됨!",
+							Message = result.Count + "개의 빈자리 확인",
+							Type = NotificationType.Information
+						}, expirationTime: TimeSpan.FromSeconds(1));
 					}
 				}
 
